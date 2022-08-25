@@ -53,7 +53,7 @@ git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 export GITHUB_USER="${GITHUB_ACTOR}"
 git add .
 git commit -m "Image tag in ${app_name}/values.yaml for ${app_name} with ${image_tag}"
-git push -u origin ${git_repo}
+git push -u origin ${git_branch}
 echo "==> Updated image tag in ${env}/${app_name}/values.yaml for ${app_name}"
 
 
