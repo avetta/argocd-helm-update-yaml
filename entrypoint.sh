@@ -9,6 +9,7 @@ app_name=$4
 env=$5
 git_repo=$6
 git_branch=$7
+github_token=$8
 
 
 DIR="$( cd "$( dirname "$0" )" && pwd )" && ls -latr
