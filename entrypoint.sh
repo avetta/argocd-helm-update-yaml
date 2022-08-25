@@ -10,6 +10,7 @@ env=$5
 git_repo=$6
 git_branch=$7
 github_token=$8
+ARGOCD_PASSWORD=$9
 
 
 DIR="$( cd "$( dirname "$0" )" && pwd )" && ls -latr
@@ -24,6 +25,11 @@ echo "==> updating tag to ${image_tag}"
 sed -i "s/tag: ${old_tag}/tag: ${image_tag}/" $VALUES_FILE
 else
 echo "==> Nothing to update"
+ARGOCLI_VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
+sudo curl --silent --location -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$ARGOCLI_VERSION/argocd-linux-amd64
+sudo chmod +x /usr/local/bin/argocd
+argocd login ${env}-argocd.avettatech.com --username admin --password ${ARGOCD_PASSWORD} --insecure --grpc-web
+argocd app delete ${app_name} --cascade=false 
 exit 0
 fi
 
