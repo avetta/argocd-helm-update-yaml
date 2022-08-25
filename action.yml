@@ -1,0 +1,40 @@
+# action.yml
+name: 'Custom Github Action to Update Deployment YAML files'
+description: 'Update helm values files with new image'
+inputs:
+  image_tag:
+    description: Image tag of the docker image
+    required: true
+    default: 'latest'
+  git_user:
+    description: username to access github repo
+    required: true
+  git_password:
+    description: Personal Access Token for k8s deployment files repo
+    required: true
+  app_name:
+    description: App name to be update
+    required: true
+  environment:
+    description: Environment to be update
+    required: true
+  git_repo:
+    description: Repo Name where Helm Chart files exits
+    required: true
+  git_branch:
+    description: Branch name
+    required: true
+outputs:
+  status: # id of output
+    description: 'YAML update status'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.git_user }}
+    - ${{ inputs.git_password }}
+    - ${{ inputs.image_tag }}
+    - ${{ inputs.app_name }}
+    - ${{ inputs.environment }}
+    - ${{ inputs.git_repo }}
+    - ${{ inputs.git_branch }}
