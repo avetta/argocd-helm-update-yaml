@@ -9,6 +9,7 @@ app_name=$4
 env=$5
 git_repo=$6
 git_branch=$7
+GH_TOKEN=$8
 
 DIR="$( cd "$( dirname "$0" )" && pwd )" && ls -latr
 VALUES_FILE=avetta/configs/${env}/${app_name}/values.yaml
