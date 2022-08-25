@@ -9,7 +9,7 @@ app_name=$4
 env=$5
 git_repo=$6
 git_branch=$7
-GH_TOKEN=$8
+github_token=$8
 
 DIR="$( cd "$( dirname "$0" )" && pwd )" && ls -latr
 VALUES_FILE=avetta/configs/${env}/${app_name}/values.yaml
@@ -34,7 +34,7 @@ fi
 echo -e "\nSetting GitHub credentials..."
 # Prevents issues with: fatal: unsafe repository ('/github/workspace' is owned by someone else)
 
-if [[ -z "${GH_TOKEN}" ]]; then
+if [[ -z "${github_token}" ]]; then
   # shellcheck disable=SC2016
   MESSAGE='Missing env var "github_token: ${{ secrets.GITHUB_TOKEN }}".'
   echo -e "[ERROR] ${MESSAGE}"
