@@ -24,9 +24,10 @@ inputs:
   git_branch:
     description: Branch name
     required: true
+    
+secrets:
   github_token:
-    description: Branch name
-    required: true
+    required: false   
 
 outputs:
   status: # id of output
@@ -34,6 +35,8 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
+  env:
+    GITHUB_TOKEN: ${{ secrets.github_token }}
   args:
     - ${{ inputs.git_user }}
     - ${{ inputs.git_password }}
