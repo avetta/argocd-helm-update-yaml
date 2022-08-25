@@ -21,7 +21,7 @@ echo "==> tag is null! trying to update tag..."
 sed -i "s/tag:/tag: ${image_tag}/" $VALUES_FILE
 elif [[ ${old_tag} != ${image_tag} ]]; then
 echo "==> updating tag to ${image_tag}"
-sed -i "s/tag: ${old_ta}/tag: ${image_tag}/" $VALUES_FILE
+sed -i "s/tag: ${old_tag}/tag: ${image_tag}/" $VALUES_FILE
 else
 echo "==> Nothing to update"
 exit 0
