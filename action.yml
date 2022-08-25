@@ -24,9 +24,10 @@ inputs:
   git_branch:
     description: Branch name
     required: true
-secrets:
-      GH_TOKEN:
-        required: false
+  github_token:
+    description: Branch name
+    required: true
+
 outputs:
   status: # id of output
     description: 'YAML update status'
@@ -41,4 +42,4 @@ runs:
     - ${{ inputs.environment }}
     - ${{ inputs.git_repo }}
     - ${{ inputs.git_branch }}
-    - ${{secrets.GH_TOKEN}}
+    - ${{ inputs.github_token }}
