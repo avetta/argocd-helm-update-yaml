@@ -26,10 +26,19 @@ exit 0
 fi
 
 #yq -i eval ".image.tag = \"${image_tag}\"" $VALUES_FILE
-git remote set-url origin https://github.com/${git_repo}.git
-git config user.email "$git_user"
-git config user.name "$git_user"
-git config --global --add safe.directory '*'
+#git remote set-url origin https://github.com/${git_repo}.git
+#git config user.email "$git_user"
+#git config user.name "$git_user"
+#git config --global --add safe.directory '*'
+echo -e "\nSetting GitHub credentials..."
+# Prevents issues with: fatal: unsafe repository ('/github/workspace' is owned by someone else)
+git config --global --add safe.directory "${GITHUB_WORKSPACE}"
+git config --global --add safe.directory /github/workspace
+git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}"
+git config --global user.name "${GITHUB_ACTOR}"
+git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+# Needed for hub binary
+export GITHUB_USER="${GITHUB_ACTOR}"
 git add .
 git commit -m "Image tag in ${app_name}/values.yaml for ${app_name} with ${image_tag}"
 git push -u origin originize_repo
