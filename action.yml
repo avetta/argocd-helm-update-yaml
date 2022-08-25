@@ -24,10 +24,10 @@ inputs:
   git_branch:
     description: Branch name
     required: true
-    
-secrets:
   github_token:
-    required: false   
+    description: Branch name
+    required: true  
+       
 
 outputs:
   status: # id of output
