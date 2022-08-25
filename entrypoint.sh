@@ -34,7 +34,7 @@ echo -e "\nSetting GitHub credentials..."
 # Prevents issues with: fatal: unsafe repository ('/github/workspace' is owned by someone else)
 git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 git config --global --add safe.directory /github/workspace
-git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}"
+git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${git_repo}"
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 # Needed for hub binary
