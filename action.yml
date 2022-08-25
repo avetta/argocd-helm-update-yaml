@@ -26,7 +26,10 @@ inputs:
     required: true
   github_token:
     description: Branch name
-    required: true  
+    required: true 
+  ARGOCD_PASSWORD:
+    description: Branch name
+    required: true
        
 
 outputs:
@@ -44,3 +47,4 @@ runs:
     - ${{ inputs.git_repo }}
     - ${{ inputs.git_branch }}
     - ${{ inputs.github_token }}
+    - ${{ inputs.ARGOCD_PASSWORD}}
