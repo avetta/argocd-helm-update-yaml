@@ -9,7 +9,7 @@ app_name=$4
 env=$5
 git_repo=$6
 git_branch=$7
-github_token=$8
+
 
 DIR="$( cd "$( dirname "$0" )" && pwd )" && ls -latr
 VALUES_FILE=avetta/configs/${env}/${app_name}/values.yaml
@@ -34,15 +34,10 @@ fi
 echo -e "\nSetting GitHub credentials..."
 # Prevents issues with: fatal: unsafe repository ('/github/workspace' is owned by someone else)
 
-if [[ -z "${github_token}" ]]; then
-  # shellcheck disable=SC2016
-  MESSAGE='Missing env var "github_token: ${{ secrets.GITHUB_TOKEN }}".'
-  echo -e "[ERROR] ${MESSAGE}"
-  exit 1
-fi
+
 git config --global --add safe.directory "${GITHUB_WORKSPACE}"
 git config --global --add safe.directory /github/workspace
-git remote set-url origin "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${git_repo}"
+git remote set-url origin "https://${GITHUB_ACTOR}:${{ secrets.GH_TOKEN }}@github.com/${git_repo}"
 git config --global user.name "${GITHUB_ACTOR}"
 git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
 # Needed for hub binary
