@@ -26,8 +26,8 @@ sed -i "s/tag: ${old_tag}/tag: ${image_tag}/" $VALUES_FILE
 else
 echo "==> Nothing to update"
 ARGOCLI_VERSION=$(curl --silent "https://api.github.com/repos/argoproj/argo-cd/releases/latest" | grep '"tag_name"' | sed -E 's/.*"([^"]+)".*/\1/')
-sudo curl --silent --location -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$ARGOCLI_VERSION/argocd-linux-amd64
-sudo chmod +x /usr/local/bin/argocd
+curl --silent --location -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/$ARGOCLI_VERSION/argocd-linux-amd64
+chmod +x /usr/local/bin/argocd
 argocd login ${env}-argocd.avettatech.com --username admin --password ${ARGOCD_PASSWORD} --insecure --grpc-web
 argocd app delete ${app_name} --cascade=false 
 exit 0
