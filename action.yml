@@ -35,8 +35,6 @@ outputs:
 runs:
   using: 'docker'
   image: 'Dockerfile'
-  env:
-    GITHUB_TOKEN: ${{ secrets.github_token }}
   args:
     - ${{ inputs.git_user }}
     - ${{ inputs.git_password }}
